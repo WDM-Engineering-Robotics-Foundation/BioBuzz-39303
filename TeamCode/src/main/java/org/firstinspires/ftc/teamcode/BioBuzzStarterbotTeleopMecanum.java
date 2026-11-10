@@ -73,9 +73,8 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    public final int LAUNCHER_TARGET_VELOCITY = 1250; //2678 RPM
-    public final int LAUNCHER_MIN_VELOCITY = 1200; //2571 RPM
-
+    public final int LAUNCHER_TARGET_VELOCITY = 1200; //2678 RPM
+    public final int LAUNCHER_MIN_VELOCITY = 1000; //2571 RPM
 
     /*
      * These four variables store the power we need to apply to the motors. In other cases, we may
@@ -110,7 +109,6 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         windmillServo = hardwareMap.get(CRServo.class, "windmillServo");
         leftIntakeServo = hardwareMap.get(CRServo.class, "left_intake_servo");
         rightIntakeServo = hardwareMap.get(CRServo.class, "right_intake_servo");
-
         /*
          * To drive forward, most robots need the motor on one side to be reversed,
          * because the axles point in opposite directions. Pushing the left stick forward
@@ -118,7 +116,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * Note: The settings here assume direct drive on left and right wheels. Gear
          * Reduction or 90 Deg drives may require direction flips
          */
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -133,7 +131,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         leftBackDrive.setZeroPowerBehavior(BRAKE);
         rightBackDrive.setZeroPowerBehavior(BRAKE);
         intake.setZeroPowerBehavior(BRAKE);
-
+        intake.setDirection(DcMotor.Direction.FORWARD);
         /*
          * Here we set our launcher to the RUN_USING_ENCODER runmode.
          * If you notice that you have no control over the velocity of the motor, it just jumps
@@ -196,7 +194,6 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * we invert it before passing it to the function.
          */
         mecanumDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-
         /*
          * Set the intake power variable to equal the right trigger, minus the left trigger.
          * Each trigger outputs a signal from 0-1, with 0 as fully released, and 1 fully depressed.
@@ -209,8 +206,26 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * allow us to avoid setting the same motors/servos power more than once per loop. That can
          * create erratic behavior.
          */
-        intakePower = gamepad1.right_trigger - gamepad1.left_trigger;
-
+        if (gamepad1.right_bumper){
+            rightIntakeServo.setPower(1);
+        }
+        else{
+            rightIntakeServo.setPower(0);
+        }
+        if (gamepad1.left_bumper) {
+            leftIntakeServo.setPower(1);
+        }
+        else{
+            leftIntakeServo.setPower(0);
+        }
+        if (gamepad1.left_trigger_pressed){
+            intakePower = 1;
+        } else if (gamepad1.y){
+            intakePower = -1;
+        }
+        else{
+            intakePower = 0;
+        }
         launch();
 
         /*
@@ -229,7 +244,9 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * Show motor powers on the Driver Station via telemetry.
          */
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
-        telemetry.addData("Triggers", "left (%.2f, right (%.2f)",gamepad1.left_trigger, gamepad1.right_trigger);
+        telemetry.addData("Triggers", "left (%.2f), right (%.2f)",gamepad1.left_trigger, gamepad1.right_trigger);
+        telemetry.addData("Launcher Velocity", launcher.getVelocity());
+        telemetry.addData("Target Velocity", LAUNCHER_TARGET_VELOCITY);
     }
 
     /*
@@ -274,7 +291,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * holding down the right gamepad. If they are, then we want to start spinning up the launcher.
          * Otherwise, we start spinning the launcher down.
          */
-        if (gamepad1.right_bumper) {
+        if (gamepad1.right_trigger > 0.1) {
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
         } else {
             launcher.setVelocity(0);
@@ -287,8 +304,8 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * add some power to the intake power. This can sometimes help dislodge stuck elements from
          * inside the hopper.
          */
-        if (gamepad1.right_bumper && launcher.getVelocity() > LAUNCHER_MIN_VELOCITY) {
-            windmillServo.setPower(1);
+        if (gamepad1.x && launcher.getVelocity() > LAUNCHER_MIN_VELOCITY) {
+            windmillServo.setPower(-1);
             intakePower += 0.5;
         } else {
             windmillServo.setPower(0);
