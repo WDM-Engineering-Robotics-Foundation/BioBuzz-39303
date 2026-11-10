@@ -13,7 +13,7 @@ public class LeftParkAuto extends LinearOpMode {
         waitForStart();
         //ListAuto.shoot(5_000);
         // 24 is a PLACEHOLDER - please find the correct value for your robot
-        ListAuto.driveBackwards(0.5,98); //problem still exists where robot refuses to stop
-        ListAuto.driveRight(0.5,55); //value not tested yet
-}
+        ListAuto.driveBackwards(0.5, 98); //hits wall; probably needs to decrease value
+        ListAuto.driveRight(0.5, 55);
+    }
 }
