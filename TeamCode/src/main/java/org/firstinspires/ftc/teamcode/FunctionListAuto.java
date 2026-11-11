@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-//48.78
 public class FunctionListAuto {
     final double WHEEL_DIAMETER_INCHES = 4.09449;
     final double ENCODER_TICKS_PER_REV = 537.7;

@@ -12,7 +12,7 @@ public class StraightParkAuto extends LinearOpMode {
 
 
         waitForStart();
-        ListAuto.driveForward(-0.50,350); //still in ticks
-        ListAuto.driveRight(0.25,50); //still in ticks
+        ListAuto.driveForward(-0.50,8);
+        ListAuto.driveRight(0.25,1);
     }
 }
