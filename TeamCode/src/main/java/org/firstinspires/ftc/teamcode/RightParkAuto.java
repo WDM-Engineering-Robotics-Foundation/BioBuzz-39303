@@ -15,7 +15,7 @@ public class RightParkAuto extends LinearOpMode {
 
         ListAuto.shoot(5_000);
         // 24 is a PLACEHOLDER - please find the correct value for your robot
-        ListAuto.driveForward(0.25,24);
-        ListAuto.driveLeft(-0.25,-24);
+        ListAuto.driveBackwards(0.25,25);
+        ListAuto.driveLeft(0.25,40);
     }
 }
