@@ -165,6 +165,13 @@ public class FunctionListAuto {
         windmillServo.setPower(0);
         launcher.setVelocity(0);
     }
+    public void UseIntake(long millis){
+
+        intake.setPower(1);
+        waitMillis(millis);
+        intake.setPower(0);
+    }
+
 
     // Helper method to stop all drivetrain motors cleanly
     public void stopMotors() {
