@@ -16,6 +16,6 @@ public class LeftParkAuto extends LinearOpMode {
         ListAuto.driveBackwards(0.5, 98);
         ListAuto.driveRight(0.5, 60); //not as far
         ListAuto.driveLeft(0.5, 2);
-        ListAuto.driveBackwards(0.1, 3);
+
     }
 }
