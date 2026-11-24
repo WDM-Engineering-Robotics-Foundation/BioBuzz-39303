@@ -188,4 +188,7 @@ public class FunctionListAuto {
             throw new RuntimeException(e);
         }
     }
+    private void rotateBot(){
+        
+    }
 }

@@ -13,14 +13,14 @@ public class LeftParkAuto extends LinearOpMode {
         waitForStart();
         ListAuto.shoot(5_000);
         //ListAuto.driveBackwards(0.5, 10);
-        //ListAuto.driveRight(0.5, 48);
+        //ListAuto.driveRight(0.5, 4 8);
         //ListAuto.driveForward(0.25, 10);
        // ListAuto.UseIntake(3000);
        // ListAuto.driveForward(0.25,10);
       //  ListAuto.driveLeft(0.5, 48);
         // 24 is a PLACEHOLDER - please find the correct value for your robot
         ListAuto.driveBackwards(0.5, 98);
-        ListAuto.driveRight(0.5, 60);
+        ListAuto.driveRight(0.5, 38);
         ListAuto.driveLeft(0.5, 2);
 
     }
