@@ -188,7 +188,12 @@ public class FunctionListAuto {
             throw new RuntimeException(e);
         }
     }
-    private void rotateBot(){
-        
+    public void rotateBot(double speed, long millis){
+        leftFrontDrive.setPower(speed);
+        leftBackDrive.setPower(speed);
+        rightFrontDrive.setPower(-speed);
+        rightBackDrive.setPower(-speed);
+        waitMillis(millis);
+        stopMotors();
     }
 }

@@ -11,17 +11,17 @@ public class LeftParkAuto extends LinearOpMode {
         FunctionListAuto ListAuto = new FunctionListAuto(hardwareMap, telemetry);
         // waits until the start button gets pressed
         waitForStart();
-        ListAuto.shoot(5_000);
-        //ListAuto.driveBackwards(0.5, 10);
-        //ListAuto.driveRight(0.5, 4 8);
-        //ListAuto.driveForward(0.25, 10);
-       // ListAuto.UseIntake(3000);
-       // ListAuto.driveForward(0.25,10);
-      //  ListAuto.driveLeft(0.5, 48);
+        //ListAuto.shoot(5_000);
+        ListAuto.driveBackwards(0.75, 10);
+        ListAuto.driveRight(0.75, 48);
+        ListAuto.driveForward(0.33, 20);
+        ListAuto.UseIntake(3000);
+        ListAuto.driveBackwards(0.75,10);
+        ListAuto.driveLeft(0.75, 60);
         // 24 is a PLACEHOLDER - please find the correct value for your robot
-        ListAuto.driveBackwards(0.5, 98);
-        ListAuto.driveRight(0.5, 38);
-        ListAuto.driveLeft(0.5, 2);
-
+        ListAuto.driveBackwards(0.75, 85);
+        ListAuto.rotateBot(1, 750);
+        ListAuto.shoot(5_000);
+        ListAuto.driveLeft(0.75, 48);
     }
 }
